@@ -1,5 +1,6 @@
 package supersample;
  
+
 import robocode.*;
 import java.awt.*;
  
