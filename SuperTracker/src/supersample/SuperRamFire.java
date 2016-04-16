@@ -24,7 +24,7 @@ public class SuperRamFire extends AdvancedRobot {
 	static double dir=1;
 	static double oldEnemyHeading;
 	static double enemyEnergy;
- 
+  // La puerta giratoria gira gira pero nunca toria
  
 	public void run(){
  
