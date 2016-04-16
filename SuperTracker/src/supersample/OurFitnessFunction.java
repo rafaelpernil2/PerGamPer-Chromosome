@@ -83,6 +83,7 @@ public class OurFitnessFunction extends FitnessFunction {
 		}
 
 		return fitness;
+		//A minor change
 	}
 
 	/**
