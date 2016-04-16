@@ -6,5 +6,4 @@ Rules:
 -Have fun!
 
 Work distribution:
-
 // TODO
