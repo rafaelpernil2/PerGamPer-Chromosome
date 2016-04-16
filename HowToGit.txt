@@ -1,0 +1,28 @@
+GitHub web:
+Create branch (if needed) // Not needed for now
+It will clone the master automatically
+
+Eclipse:
+
+File > Import > Git > Projects from Git > Clone URI > Paste git@github.com:rafaelpernil2/PerGamPer-Chromosome.git > Choose just your branch > Click next till the end 
+
+Window > Show View > Others > Git > Git repositories
+
+(Git Repositories) PerGamPer-Chromosome > Remotes > origin > Right click on the red arrow icon (push) > Configure Push > Add > Ctrl + Space in Remote Branch > Choose your branch > Save
+
+PerGamPer-Chromosome > Remotes > origin > Right click on the red arrow icon (push) > Configure Push > Add > Ctrl + Space in Source > Choose master > Put refs/remotes/origin/"your branch name" in Destination > Finish. Now if you have another ref, delete it. Save.
+
+We're done!
+
+
+To work with git:
+
+Code as always and when you finish, right click into your file, click Team, and then Commit. Put a clear commit message and hit Commit or Commit and Push to keep updated your branch.
+
+Git Repositories > PerGamPer-Chromosome > Remotes > origin > Right click on push > Push!
+
+Then if you think your code is fucking awesome, click Pull Request in your branch in GitHub. All the changes will be marked and we will be good to go! Put a message and create the pull request.
+
+Also in the pull request we can add labels to identify the reasons for change like enhancements or bugfixing. Or achieving some goals.
+
+And then when any of us merge, we get  the new code :D
