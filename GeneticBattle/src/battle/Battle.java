@@ -20,5 +20,5 @@ public class Battle {
 		this.hideEnemyNames = hideEnemyNames;
 		this.robots = robots;
 	}
-
+	
 }
