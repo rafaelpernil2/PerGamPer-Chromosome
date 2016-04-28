@@ -1,6 +1,5 @@
 package supersample;
 
-import java.io.File;
 import java.io.*;
 import java.util.Scanner;
 
@@ -111,19 +110,22 @@ public class OurFitnessFunction extends FitnessFunction {
 
 		return (numQuarters * 25) + (numDimes * 10) + (numNickels * 5) + numPennies;
 	}
-	public double getDistanceLimit(IChromosome a_potentialSolution){
-		try {
+	public void readParameters
+	public double getDistanceLimit(IChromosome a_potentialSolution) throws FileNotFoundException{
+			String x = a_potentialSolution.getGene(0).getAllele();
 			Scanner sc = new Scanner (new File ("robot.txt"));
 			sc.useDelimiter("[;]+");
 			//while (sc.hasNext()){
-			double res = Double.parseDouble(sc.next());
+			double res;
+			if (sc.next() == null ){
+				res = 0.0;
+			}
+			else{
+				res = Double.parseDouble(sc.next());
+			}
 			//}
 			sc.close();
-		}
-		catch (FileNotFoundException e){
-			System.out.println("The file has not been created");
-		}
-		
+			return res;
 	}
 	/**
 	 * Retrieves the number of coins represented by the given potential solution
@@ -160,4 +162,5 @@ public class OurFitnessFunction extends FitnessFunction {
 
 		return totalCoins;
 	}
+	public void generateBattle(){}
 }

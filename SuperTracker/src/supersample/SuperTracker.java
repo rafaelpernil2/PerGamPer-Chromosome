@@ -3,7 +3,7 @@ package supersample;
 
 import robocode.*;
 import java.awt.*;
- 
+import java.io.*; 
 /**
  * SuperTracker - a Super Sample Robot by CrazyBassoonist based on the robot Tracker by Mathew Nelson and maintained by Flemming N. Larsen
  * <p/>
@@ -62,5 +62,8 @@ public class SuperTracker extends AdvancedRobot {
 			turnRight(30);
 			turnLeft(30);
 		}
+	}
+	public void readParameters (File fl){
+		
 	}
 }
