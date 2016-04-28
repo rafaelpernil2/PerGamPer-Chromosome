@@ -1,8 +1,13 @@
 package supersample;
 
+import java.io.File;
+import java.io.*;
+import java.util.Scanner;
+
 import org.jgap.Chromosome;
 import org.jgap.FitnessFunction;
 import org.jgap.IChromosome;
+import robocode.*;
 
 /**
  * This class provides an implementation of the classic "Make change" problem
@@ -19,22 +24,21 @@ import org.jgap.IChromosome;
  * the genetic algorithm still will get the correct answer virtually everytime.
  */
 public class OurFitnessFunction extends FitnessFunction {
-	private final int m_targetAmount;
+	private final int my_fitness_percentage;
 
 	/**
-	 * Constructs this MinimizingMakeChangeFitnessFunction with the desired
-	 * amount of change to make.
+	 * 
 	 *
-	 * @param a_targetAmount
+	 * @param fitness_percentage
 	 *            The desired amount of change, in cents. This value must be
 	 *            between 1 and 99 cents.
 	 */
-	public OurFitnessFunction(int a_targetAmount) {
-		if (a_targetAmount < 1 || a_targetAmount > 99) {
-			throw new IllegalArgumentException("Change amount must be between 1 and 99 cents.");
+	public OurFitnessFunction(int fitness_percentage) {
+		if (fitness_percentage < 1 || fitness_percentage > 99) {
+			throw new IllegalArgumentException("Percentage must be between 0 and 99");
 		}
 
-		m_targetAmount = a_targetAmount;
+		my_fitness_percentage = fitness_percentage;
 	}
 
 	/**
@@ -60,6 +64,10 @@ public class OurFitnessFunction extends FitnessFunction {
 		// solutions representing fewer total coins, and lower fitness
 		// values for solutions representing a larger total number of coins.
 		// ------------------------------------------------------------------
+		double distance_limit = getDistanceLimit(a_subject);
+		double speed_change_probability = getSpeedChangeProb(a_subject);
+		double range_of_speeds = getRangeOfSpeeds(a_subject);
+		double min_robot_speed = getMinRobotSpeed(a_subject);
 		int changeAmount = amountOfChange(a_subject);
 		int totalCoins = getTotalNumberOfCoins(a_subject);
 		int changeDifference = Math.abs(m_targetAmount - changeAmount);
@@ -103,7 +111,20 @@ public class OurFitnessFunction extends FitnessFunction {
 
 		return (numQuarters * 25) + (numDimes * 10) + (numNickels * 5) + numPennies;
 	}
-
+	public double getDistanceLimit(IChromosome a_potentialSolution){
+		try {
+			Scanner sc = new Scanner (new File ("robot.txt"));
+			sc.useDelimiter("[;]+");
+			//while (sc.hasNext()){
+			double res = Double.parseDouble(sc.next());
+			//}
+			sc.close();
+		}
+		catch (FileNotFoundException e){
+			System.out.println("The file has not been created");
+		}
+		
+	}
 	/**
 	 * Retrieves the number of coins represented by the given potential solution
 	 * at the given gene position.
