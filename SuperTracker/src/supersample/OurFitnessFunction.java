@@ -91,23 +91,14 @@ public class OurFitnessFunction extends FitnessFunction {
 		
 		//Run Battle
 		
-		//Read battle results
-		
+		//Read battle results, being worked
+	
 		//
-		
-		//Compare values
-		
-		//Generate Fitness
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+
+		// Compare values (compare the score of both results using getScore()
+
+		// Generate Fitness
+
 		double fitness = (99 - changeDifference);
 
 		// Step 2: If the solution amount equals the target amount, then
@@ -119,9 +110,25 @@ public class OurFitnessFunction extends FitnessFunction {
 		}
 
 		return fitness;
-		//A minor change
+		// A minor change
 	}
 
+	public void readBattleResults(File fl) { //waiting to know which are the final parameter of the results
+		Scanner sc = new Scanner(fl);
+
+		while (sc.hasNext()) {
+			// refresh the parameters due the File
+			//Parameter1=sc.next();
+			//...
+			/*
+			 * if(ParameterX==null){
+			 * 		ParameterX=minimumValue; //in order to get some value at least
+			 * }
+			 */
+
+		}
+		sc.close();
+	}
 	/**
 	 * Calculates the total amount of change (in cents) represented by the given
 	 * chromosome and returns that amount.
@@ -139,23 +146,25 @@ public class OurFitnessFunction extends FitnessFunction {
 
 		return (numQuarters * 25) + (numDimes * 10) + (numNickels * 5) + numPennies;
 	}
+
 	public void readParameters
-	public double getDistanceLimit(IChromosome a_potentialSolution) throws FileNotFoundException{
-			String x = a_potentialSolution.getGene(0).getAllele();
-			Scanner sc = new Scanner (new File ("robot.txt"));
-			sc.useDelimiter("[;]+");
-			//while (sc.hasNext()){
-			double res;
-			if (sc.next() == null ){
-				res = 0.0;
-			}
-			else{
-				res = Double.parseDouble(sc.next());
-			}
-			//}
-			sc.close();
-			return res;
+
+	public double getDistanceLimit(IChromosome a_potentialSolution) throws FileNotFoundException {
+		String x = a_potentialSolution.getGene(0).getAllele();
+		Scanner sc = new Scanner(new File("robot.txt"));
+		sc.useDelimiter("[;]+");
+		// while (sc.hasNext()){
+		double res;
+		if (sc.next() == null) {
+			res = 0.0;
+		} else {
+			res = Double.parseDouble(sc.next());
+		}
+		// }
+		sc.close();
+		return res;
 	}
+
 	/**
 	 * Retrieves the number of coins represented by the given potential solution
 	 * at the given gene position.
@@ -191,5 +200,7 @@ public class OurFitnessFunction extends FitnessFunction {
 
 		return totalCoins;
 	}
-	public void generateBattle(){}
+
+	public void generateBattle() {
+	}
 }
