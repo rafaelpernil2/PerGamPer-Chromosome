@@ -3,7 +3,9 @@ package supersample;
 
 import robocode.*;
 import java.awt.*;
-import java.io.*; 
+import java.io.*;
+import java.util.Random;
+import java.util.Scanner; 
 /**
  * SuperTracker - a Super Sample Robot by CrazyBassoonist based on the robot Tracker by Mathew Nelson and maintained by Flemming N. Larsen
  * <p/>
@@ -14,6 +16,10 @@ public class SuperTracker extends AdvancedRobot {
 	/**
 	 * run:  Tracker's main run function
 	 */
+	private double distance_limit;
+	private double speed_change_probability ;
+	private double range_of_speeds;
+	private double min_robot_speed;
 	public void run() {
 		setAdjustRadarForRobotTurn(true);//keep the radar still while we turn
 		setBodyColor(new Color(128, 128, 50));
@@ -63,7 +69,20 @@ public class SuperTracker extends AdvancedRobot {
 			turnLeft(30);
 		}
 	}
-	public void readParameters (File fl){
-		
+	
+	public void onBattleEnded(BattleEndedEvent e){
+		e.getResults().hashCode();
 	}
+	public void readParameters (File fl) throws IOException{
+		Scanner sc = new Scanner (fl);
+		sc.useDelimiter("[;]");
+		distance_limit = sc.nextDouble();
+		speed_change_probability = sc.nextDouble();
+		range_of_speeds= sc.nextDouble();
+		min_robot_speed = sc.nextDouble();
+		sc.close();	
+	}
+	
+	public Random randomGenerator(){
+		return null;}
 }

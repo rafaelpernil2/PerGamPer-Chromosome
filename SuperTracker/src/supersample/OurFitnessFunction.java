@@ -63,10 +63,7 @@ public class OurFitnessFunction extends FitnessFunction {
 		// solutions representing fewer total coins, and lower fitness
 		// values for solutions representing a larger total number of coins.
 		// ------------------------------------------------------------------
-		double distance_limit = getDistanceLimit(a_subject);
-		double speed_change_probability = getSpeedChangeProb(a_subject);
-		double range_of_speeds = getRangeOfSpeeds(a_subject);
-		double min_robot_speed = getMinRobotSpeed(a_subject);
+		
 		int changeAmount = amountOfChange(a_subject);
 		int totalCoins = getTotalNumberOfCoins(a_subject);
 		int changeDifference = Math.abs(m_targetAmount - changeAmount);
@@ -79,6 +76,38 @@ public class OurFitnessFunction extends FitnessFunction {
 		// to the target amount and lower values for amounts further away
 		// from the target amount.
 		// ------------------------------------------------------------------
+		
+		
+		//Read genes
+		double distance_limit = getDistanceLimit(a_subject);
+		double speed_change_probability = getSpeedChangeProb(a_subject);
+		double range_of_speeds = getRangeOfSpeeds(a_subject);
+		double min_robot_speed = getMinRobotSpeed(a_subject);
+		//Write file
+		
+		
+		
+		//Within 10 iterations...
+		
+		//Run Battle
+		
+		//Read battle results
+		
+		//
+		
+		//Compare values
+		
+		//Generate Fitness
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		double fitness = (99 - changeDifference);
 
 		// Step 2: If the solution amount equals the target amount, then

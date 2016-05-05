@@ -19,7 +19,7 @@ public class PGP_Gen extends BaseGene {
 		if( min < 0 || max < 0 )
         {
             throw new IllegalArgumentException(
-                "The maximum number of quarters must be non-negative." );
+                "The upper bound and the lower bound must be non-negative." );
         }
 
         
