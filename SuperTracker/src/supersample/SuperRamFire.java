@@ -2,7 +2,9 @@ package supersample;
  
 import java.awt.Color;
 import java.awt.geom.Point2D;
- 
+import java.io.IOException;
+import java.io.PrintStream;
+
 import robocode.*;
 import robocode.util.Utils;
 /**
@@ -111,5 +113,24 @@ public class SuperRamFire extends AdvancedRobot {
 	}
 	public void onHitWall(HitWallEvent e){
 		dir=-dir;
+	}
+	public void onBattleEnded(BattleEndedEvent e) {
+
+		try {
+			PrintStream w = new PrintStream(new RobocodeFileOutputStream(getDataFile("score.txt")));
+			int sc = e.getResults().getScore();
+			w.println(sc);
+			// PrintStreams don't throw IOExceptions during prints, they simply
+			// set a flag.... so check it here.
+			if (w.checkError()) {
+				out.println("I could not write the count!");
+			}
+			if (w != null) {
+				w.close();
+			}
+		} catch (IOException ex) {
+			out.println("IOException trying to write: ");
+			ex.printStackTrace(out);
+		}
 	}
 }

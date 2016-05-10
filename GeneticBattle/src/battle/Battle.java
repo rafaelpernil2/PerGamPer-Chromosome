@@ -21,4 +21,7 @@ public class Battle {
 		this.robots = robots;
 	}
 	
+	
+	
+	
 }
