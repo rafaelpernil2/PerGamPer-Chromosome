@@ -27,15 +27,8 @@ import robocode.control.RobotSpecification;
  */
 @SuppressWarnings("serial")
 public class OurFitnessFunction extends FitnessFunction {
-	@SuppressWarnings(value = { "unused" })
-	private final double my_fitness_percentage;
-
-	public OurFitnessFunction(double fitness_percentage) {
-		if (fitness_percentage < 0 || fitness_percentage >= 1) {
-			throw new IllegalArgumentException("Percentage must be between 0 and 99");
-		}
-
-		my_fitness_percentage = fitness_percentage;
+	
+	public OurFitnessFunction() {
 	}
 
 	/**
