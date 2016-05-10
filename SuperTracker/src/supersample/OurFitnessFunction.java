@@ -3,10 +3,13 @@ package supersample;
 import java.io.*;
 import java.util.Scanner;
 
-import org.jgap.Chromosome;
 import org.jgap.FitnessFunction;
 import org.jgap.IChromosome;
-import robocode.*;
+import robocode.control.BattleSpecification;
+import robocode.control.BattlefieldSpecification;
+import robocode.control.RobocodeEngine;
+import robocode.control.RobotSetup;
+import robocode.control.RobotSpecification;
 
 /**
  * This class provides an implementation of the classic "Make change" problem
@@ -22,18 +25,13 @@ import robocode.*;
  * with more local optima. However, as can be seen from running this example,
  * the genetic algorithm still will get the correct answer virtually everytime.
  */
+@SuppressWarnings("serial")
 public class OurFitnessFunction extends FitnessFunction {
-	private final int my_fitness_percentage;
+	@SuppressWarnings(value = { "unused" })
+	private final double my_fitness_percentage;
 
-	/**
-	 * 
-	 *
-	 * @param fitness_percentage
-	 *            The desired amount of change, in cents. This value must be
-	 *            between 1 and 99 cents.
-	 */
-	public OurFitnessFunction(int fitness_percentage) {
-		if (fitness_percentage < 1 || fitness_percentage > 99) {
+	public OurFitnessFunction(double fitness_percentage) {
+		if (fitness_percentage < 0 || fitness_percentage >= 1) {
 			throw new IllegalArgumentException("Percentage must be between 0 and 99");
 		}
 
@@ -51,145 +49,101 @@ public class OurFitnessFunction extends FitnessFunction {
 	 * @return A positive integer reflecting the fitness rating of the given
 	 *         Chromosome.
 	 */
-	public double evaluate(IChromosome a_subject) {
-		// The fitness value measures both how close the value is to the
-		// target amount supplied by the user and the total number of coins
-		// represented by the solution. We do this in two steps: first,
-		// we consider only the represented amount of change vs. the target
-		// amount of change and calculate higher fitness values for amounts
-		// closer to the target, and lower fitness values for amounts further
-		// away from the target. If the amount equals the target, then we go
-		// to step 2, which adjusts the fitness to a higher value for
-		// solutions representing fewer total coins, and lower fitness
-		// values for solutions representing a larger total number of coins.
-		// ------------------------------------------------------------------
-		
-		int changeAmount = amountOfChange(a_subject);
-		int totalCoins = getTotalNumberOfCoins(a_subject);
-		int changeDifference = Math.abs(m_targetAmount - changeAmount);
-
-		// Step 1: Determine the distance of the amount represented by the
-		// solution from the target amount. Since we know the maximum amount
-		// of change is 99 cents, we'll subtract from that the difference
-		// between the solution amount and the target amount. That will give
-		// the desired effect of returning higher values for amounts close
-		// to the target amount and lower values for amounts further away
-		// from the target amount.
-		// ------------------------------------------------------------------
-		
-		
-		//Read genes
-		double distance_limit = getDistanceLimit(a_subject);
-		double speed_change_probability = getSpeedChangeProb(a_subject);
-		double range_of_speeds = getRangeOfSpeeds(a_subject);
-		double min_robot_speed = getMinRobotSpeed(a_subject);
-		//Write file
-		
-		
-		
-		//Within 10 iterations...
-		
-		//Run Battle
-		
-		//Read battle results
-		
-		//
-		
-		//Compare values
-		
-		//Generate Fitness
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		double fitness = (99 - changeDifference);
-
-		// Step 2: If the solution amount equals the target amount, then
-		// we add additional fitness points for solutions representing fewer
-		// total coins.
-		// -----------------------------------------------------------------
-		if (changeAmount == m_targetAmount) {
-			fitness += 100 - (10 * totalCoins);
-		}
-
-		return fitness;
-		//A minor change
-	}
-
-	/**
-	 * Calculates the total amount of change (in cents) represented by the given
-	 * chromosome and returns that amount.
-	 *
-	 * @param a_potentialSolution
-	 *            The potential solution to evaluate.
-	 * @return The total amount of change (in cents) represented by the given
-	 *         solution.
-	 */
-	public static int amountOfChange(IChromosome a_potentialSolution) {
-		int numQuarters = getNumberOfCoinsAtGene(a_potentialSolution, 0);
-		int numDimes = getNumberOfCoinsAtGene(a_potentialSolution, 1);
-		int numNickels = getNumberOfCoinsAtGene(a_potentialSolution, 2);
-		int numPennies = getNumberOfCoinsAtGene(a_potentialSolution, 3);
-
-		return (numQuarters * 25) + (numDimes * 10) + (numNickels * 5) + numPennies;
-	}
-	public void readParameters
-	public double getDistanceLimit(IChromosome a_potentialSolution) throws FileNotFoundException{
-			String x = a_potentialSolution.getGene(0).getAllele();
-			Scanner sc = new Scanner (new File ("robot.txt"));
-			sc.useDelimiter("[;]+");
-			//while (sc.hasNext()){
-			double res;
-			if (sc.next() == null ){
-				res = 0.0;
+	protected double evaluate(IChromosome a_subject) {
+		// Read genes
+		final int MAX = 10;
+		double sum = 0.0;
+		double[] results = new double[MAX];
+		for (int i = 0; i < MAX; i++) {
+			double distance_limit = (double) a_subject.getGene(0).getAllele();
+			double speed_change_probability = (double) a_subject.getGene(1).getAllele();
+			double range_of_speeds = (double) a_subject.getGene(2).getAllele();
+			double min_robot_speed = (double) a_subject.getGene(3).getAllele();
+			// Write file
+			try {
+				PrintStream w = new PrintStream(new FileOutputStream(new File(
+						"C:/Users/rafae/git/PerGamPer-Chromosome/SuperTracker/bin/supersample/SuperTracker.data/genes.txt")));
+				w.println(distance_limit);
+				w.println(speed_change_probability);
+				w.println(range_of_speeds);
+				w.println(min_robot_speed);
+				// PrintStreams don't throw IOExceptions during prints, they
+				// simply
+				// set a flag.... so check it here.
+				if (w.checkError()) {
+					System.out.println("I could not write!");
+				}
+				if (w != null) {
+					w.close();
+				}
+			} catch (IOException ex) {
+				System.out.println("IOException trying to write: ");
+				ex.printStackTrace(System.out);
 			}
-			else{
-				res = Double.parseDouble(sc.next());
+
+			// Within 10 iterations...
+
+			// Run Battle
+			RobocodeEngine engine = new RobocodeEngine(new java.io.File("C:/robocode"));
+			engine.setVisible(false);
+			int NumPixelRows = 832;
+			int NumPixelCols = 640;
+			BattlefieldSpecification battlefield = new BattlefieldSpecification(NumPixelRows, NumPixelCols);
+			// 800x600
+			// Setup battle parameters
+			int numberOfRounds = 10;
+			long inactivityTime = 1;
+			double gunCoolingRate = 1.0;
+			int sentryBorderSize = 50;
+			boolean hideEnemyNames = false;
+			int NumEnemies = 1; // Defined by programmer
+			// Define specifications
+			RobotSpecification[] modelRobots = engine
+					.getLocalRepository("supersample.SuperRamFire*,supersample.SuperTracker*");
+			RobotSpecification[] existingRobots = new RobotSpecification[NumEnemies + 1];
+			RobotSetup[] robotSetups = new RobotSetup[NumEnemies + 1];
+			existingRobots[NumEnemies] = modelRobots[1];
+			existingRobots[0] = modelRobots[0];
+			robotSetups[0] = new RobotSetup((double) (1 * 64 + 32), (double) (5 * 64 + 32), 0.0);
+			double InitialAgentRow = (5 * 64) + 32;
+			double InitialAgentCol = (11 * 64) + 32;
+			robotSetups[NumEnemies] = new RobotSetup(InitialAgentCol, InitialAgentRow, 0.0);
+
+			/* Create and run the battle */
+
+			BattleSpecification battleSpec = new BattleSpecification(battlefield, numberOfRounds, inactivityTime,
+					gunCoolingRate, sentryBorderSize, hideEnemyNames, existingRobots, robotSetups);
+
+			// Run our specified battle and let it run till it is over
+			engine.runBattle(battleSpec, true); // waits till the battle
+												// finishes
+			// Cleanup our RobocodeEngine
+			engine.close();
+
+			// Read battle results
+			int ramfire = 0, supertracker = 0;
+			try {
+				Scanner sc = new Scanner(new java.io.File(
+						"C:/Users/rafae/git/PerGamPer-Chromosome/SuperTracker/bin/supersample/SuperRamFire.data/score.txt"));
+				if (sc.hasNext()) {
+					ramfire = sc.nextInt();
+				}
+				sc.close();
+				Scanner sc2 = new Scanner(new java.io.File(
+						"C:/Users/rafae/git/PerGamPer-Chromosome/SuperTracker/bin/supersample/SuperTracker.data/score.txt"));
+				if (sc2.hasNext()) {
+					supertracker = sc2.nextInt();
+				}
+				sc2.close();
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-			//}
-			sc.close();
-			return res;
-	}
-	/**
-	 * Retrieves the number of coins represented by the given potential solution
-	 * at the given gene position.
-	 *
-	 * @param a_potentialSolution
-	 *            The potential solution to evaluate.
-	 * @param a_position
-	 *            The gene position to evaluate.
-	 * @return the number of coins represented by the potential solution at the
-	 *         given gene position.
-	 */
-	public static int getNumberOfCoinsAtGene(IChromosome a_potentialSolution, int a_position) {
-		Integer numCoins = (Integer) a_potentialSolution.getGene(a_position).getAllele();
-
-		return numCoins.intValue();
-	}
-
-	/**
-	 * Returns the total number of coins represented by all of the genes in the
-	 * given chromosome.
-	 *
-	 * @param a_potentialsolution
-	 *            The potential solution to evaluate.
-	 * @return The total number of coins represented by the given Chromosome.
-	 */
-	public static int getTotalNumberOfCoins(IChromosome a_potentialsolution) {
-		int totalCoins = 0;
-
-		int numberOfGenes = a_potentialsolution.size();
-		for (int i = 0; i < numberOfGenes; i++) {
-			totalCoins += getNumberOfCoinsAtGene(a_potentialsolution, i);
+			// Compare values
+			double fitness = supertracker / (ramfire + supertracker);
+			sum += fitness;
 		}
-
-		return totalCoins;
+		// Generate Fitness
+		return (sum / results.length);
 	}
-	public void generateBattle(){}
 }
