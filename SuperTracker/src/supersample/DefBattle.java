@@ -96,7 +96,7 @@ public class DefBattle {
 			for (int i=0; i < 1000; i++){
 				double origFitness = pgp.getFitnessValue();
 				double evaluate = fit.evaluate(pgp);
-				pgp.setFitnessValue(Math.max(origFitness,evaluate);
+				pgp.setFitnessValue(Math.max(origFitness,evaluate));
 				double goodFitness = pgp.getFitnessValue();
 				genes[0].applyMutation(0, 1-evaluate);
 				genes[1].applyMutation(0, 1-evaluate);
