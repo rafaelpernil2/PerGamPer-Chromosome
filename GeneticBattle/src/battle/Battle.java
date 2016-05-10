@@ -4,7 +4,7 @@ import robocode.control.*;
 
 public class Battle {
 	public static void main(String[] args) {
-		RobocodeEngine engine = new RobocodeEngine(new java.io.File("C:/robocode"));
+		RobocodeEngine engine = new RobocodeEngine(new java.io.File("/home/rafaelpernil/Descargas/robocode"));
 		engine.setVisible(true);
 		int NumPixelRows = 832;
 		int NumPixelCols = 640;

@@ -62,7 +62,7 @@ public class OurFitnessFunction extends FitnessFunction {
 			// Write file
 			try {
 				PrintStream w = new PrintStream(new FileOutputStream(new File(
-						"C:/Users/rafae/git/PerGamPer-Chromosome/SuperTracker/bin/supersample/SuperTracker.data/genes.txt")));
+						"/home/rafaelpernil/git/PerGamPer-Chromosome/SuperTracker/bin/supersample/SuperTracker.data/genes.txt")));
 				w.println(distance_limit);
 				w.println(speed_change_probability);
 				w.println(range_of_speeds);
@@ -84,7 +84,7 @@ public class OurFitnessFunction extends FitnessFunction {
 			// Within 10 iterations...
 
 			// Run Battle
-			RobocodeEngine engine = new RobocodeEngine(new java.io.File("C:/robocode"));
+			RobocodeEngine engine = new RobocodeEngine(new java.io.File("/home/rafaelpernil/Descargas/robocode"));
 			engine.setVisible(false);
 			int NumPixelRows = 832;
 			int NumPixelCols = 640;
@@ -124,13 +124,13 @@ public class OurFitnessFunction extends FitnessFunction {
 			int ramfire = 0, supertracker = 0;
 			try {
 				Scanner sc = new Scanner(new java.io.File(
-						"C:/Users/rafae/git/PerGamPer-Chromosome/SuperTracker/bin/supersample/SuperRamFire.data/score.txt"));
+						"/home/rafaelpernil/git/PerGamPer-Chromosome/SuperTracker/bin/supersample/SuperRamFire.data/score.txt"));
 				if (sc.hasNext()) {
 					ramfire = sc.nextInt();
 				}
 				sc.close();
 				Scanner sc2 = new Scanner(new java.io.File(
-						"C:/Users/rafae/git/PerGamPer-Chromosome/SuperTracker/bin/supersample/SuperTracker.data/score.txt"));
+						"/home/rafaelpernil/git/PerGamPer-Chromosome/SuperTracker/bin/supersample/SuperTracker.data/score.txt"));
 				if (sc2.hasNext()) {
 					supertracker = sc2.nextInt();
 				}
