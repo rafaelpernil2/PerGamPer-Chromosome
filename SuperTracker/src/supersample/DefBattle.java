@@ -94,14 +94,16 @@ public class DefBattle {
 			IChromosome pgp = new Chromosome(genes);
 			OurFitnessFunction fit = new OurFitnessFunction (pgp.getFitnessValue());
 			for (int i=0; i < 1000; i++){
+				double origFitness = pgp.getFitnessValue();
 				double evaluate = fit.evaluate(pgp);
-				pgp.setFitnessValue(evaluate);
+				pgp.setFitnessValue(Math.max(origFitness,evaluate);
+				double goodFitness = pgp.getFitnessValue();
 				genes[0].applyMutation(0, 1-evaluate);
 				genes[1].applyMutation(0, 1-evaluate);
 				genes[2].applyMutation(0, 1-evaluate);
 				genes[3].applyMutation(0, 1-evaluate);
-				double evaluate2 = fit.evaluate(pgp);
-				pgp.setFitnessValue(Math.max(evaluate, evaluate2));
+				evaluate = fit.evaluate(pgp);
+				pgp.setFitnessValue(Math.max(evaluate, goodFitness));
 				System.out.println("Calculated " + i);
 			}
 			System.out.println("Ended");
