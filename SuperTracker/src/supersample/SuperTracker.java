@@ -149,6 +149,11 @@ public class SuperTracker extends AdvancedRobot {
 		speed_change_probability = sc.nextDouble();
 		range_of_speeds = sc.nextDouble();
 		min_robot_speed = sc.nextDouble();
+		System.out.println("Chromosome used:");
+		System.out.println("Distance Limit: " + distance_limit);
+		System.out.println("Speed change probability: " +speed_change_probability);
+		System.out.println("Range of Speeds: " + range_of_speeds);
+		System.out.println("Minimum Robot Speed: " + min_robot_speed);
 		sc.close();
 	}
 }

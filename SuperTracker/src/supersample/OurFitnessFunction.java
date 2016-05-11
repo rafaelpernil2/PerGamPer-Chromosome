@@ -5,12 +5,12 @@ import java.util.Scanner;
 
 import org.jgap.FitnessFunction;
 import org.jgap.IChromosome;
+
 import robocode.control.BattleSpecification;
 import robocode.control.BattlefieldSpecification;
 import robocode.control.RobocodeEngine;
 import robocode.control.RobotSetup;
 import robocode.control.RobotSpecification;
-
 /**
  * This class provides an implementation of the classic "Make change" problem
  * using a genetic algorithm. The goal of the problem is to provide a specified
@@ -62,7 +62,7 @@ public class OurFitnessFunction extends FitnessFunction {
 			// Write file
 			try {
 				PrintStream w = new PrintStream(new FileOutputStream(new File(
-						"C:/Users/rafae/git/PerGamPer-Chromosome/SuperTracker/bin/supersample/SuperTracker.data/genes.txt")));
+						"/Users/EduardoP/git/PerGamPer-Chromosome/SuperTracker/bin/supersample/SuperTracker.data/genes.txt")));
 				w.println(distance_limit);
 				w.println(speed_change_probability);
 				w.println(range_of_speeds);
@@ -84,7 +84,7 @@ public class OurFitnessFunction extends FitnessFunction {
 			// Within 10 iterations...
 
 			// Run Battle
-			RobocodeEngine engine = new RobocodeEngine(new java.io.File("C:/robocode"));
+			RobocodeEngine engine = new RobocodeEngine(new java.io.File("/Users/EduardoP/robocode"));
 			engine.setVisible(false);
 			int NumPixelRows = 832;
 			int NumPixelCols = 640;
@@ -120,17 +120,18 @@ public class OurFitnessFunction extends FitnessFunction {
 			// Cleanup our RobocodeEngine
 			engine.close();
 
+
 			// Read battle results
 			int ramfire = 0, supertracker = 0;
 			try {
 				Scanner sc = new Scanner(new java.io.File(
-						"C:/Users/rafae/git/PerGamPer-Chromosome/SuperTracker/bin/supersample/SuperRamFire.data/score.txt"));
+						"/Users/EduardoP/git/PerGamPer-Chromosome/SuperTracker/bin/supersample/SuperRamFire.data/score.txt"));
 				if (sc.hasNext()) {
 					ramfire = sc.nextInt();
 				}
 				sc.close();
 				Scanner sc2 = new Scanner(new java.io.File(
-						"C:/Users/rafae/git/PerGamPer-Chromosome/SuperTracker/bin/supersample/SuperTracker.data/score.txt"));
+						"/Users/EduardoP/git/PerGamPer-Chromosome/SuperTracker/bin/supersample/SuperTracker.data/score.txt"));
 				if (sc2.hasNext()) {
 					supertracker = sc2.nextInt();
 				}

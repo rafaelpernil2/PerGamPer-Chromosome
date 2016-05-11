@@ -25,61 +25,61 @@ public class DefBattle {
 	public static void main(String[] args) {
 
 		
-//		int ramfire = 0, supertracker = 0;
-//		try {
-//			Scanner sc = new Scanner(new java.io.File(
-//					"C:/Users/rafae/git/PerGamPer-Chromosome/SuperTracker/bin/supersample/SuperRamFire.data/score.txt"));
-//			if (sc.hasNext()) {
-//				ramfire = sc.nextInt();
-//			}
-//			sc.close();
-//			Scanner sc2 = new Scanner(new java.io.File(
-//					"C:/Users/rafae/git/PerGamPer-Chromosome/SuperTracker/bin/supersample/SuperTracker.data/score.txt"));
-//			if (sc2.hasNext()) {
-//				supertracker = sc2.nextInt();
-//			}
-//			sc2.close();
-//		} catch (FileNotFoundException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		System.out.println(ramfire);
-//		System.out.println(supertracker);
+	int ramfire = 0, supertracker = 0;
+		try {
+			Scanner sc = new Scanner(new java.io.File(
+					"/Users/EduardoP/git/PerGamPer-Chromosome/SuperTracker/bin/supersample/SuperRamFire.data/score.txt"));
+			if (sc.hasNext()) {
+				ramfire = sc.nextInt();
+			}
+			sc.close();
+			Scanner sc2 = new Scanner(new java.io.File(
+					"/Users/EduardoP/git/PerGamPer-Chromosome/SuperTracker/bin/supersample/SuperTracker.data/score.txt"));
+			if (sc2.hasNext()) {
+				supertracker = sc2.nextInt();
+			}
+			sc2.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println(ramfire);
+		System.out.println(supertracker);
 
-//		try {
-//			PrintStream w = new PrintStream(new FileOutputStream(new File(
-//					"C:/Users/rafae/git/PerGamPer-Chromosome/SuperTracker/bin/supersample/SuperTracker.data/genes.txt")));
-//			w.println(150);
-//			w.println(0.1);
-//			w.println(12);
-//			w.println(12);
-//			// PrintStreams don't throw IOExceptions during prints, they simply
-//			// set a flag.... so check it here.
-//			if (w.checkError()) {
-//				System.out.println("I could not write!");
-//			}
-//			if (w != null) {
-//				w.close();
-//			}
-//		} catch (IOException ex) {
-//			System.out.println("IOException trying to write: ");
-//			ex.printStackTrace(System.out);
-//		}
-//
-//		try {
-//			Scanner sc = new Scanner(new File(
-//					"C:/Users/rafae/git/PerGamPer-Chromosome/SuperTracker/bin/supersample/SuperTracker.data/genes.txt"));
-//			// sc.useDelimiter("\n");
-//			sc.useLocale(Locale.US);
-//			System.out.println(sc.nextDouble());
-//			System.out.println(sc.nextDouble());
-//			System.out.println(sc.nextDouble());
-//			System.out.println(sc.nextDouble());
-//			sc.close();
-//		} catch (FileNotFoundException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+		try {
+			PrintStream w = new PrintStream(new FileOutputStream(new File(
+					"/Users/EduardoP/git/PerGamPer-Chromosome/SuperTracker/bin/supersample/SuperTracker.data/genes.txt")));
+			w.println(150);
+			w.println(0.1);
+			w.println(12);
+			w.println(12);
+			// PrintStreams don't throw IOExceptions during prints, they simply
+			// set a flag.... so check it here.
+			if (w.checkError()) {
+				System.out.println("I could not write!");
+			}
+			if (w != null) {
+				w.close();
+			}
+		} catch (IOException ex) {
+			System.out.println("IOException trying to write: ");
+			ex.printStackTrace(System.out);
+		}
+
+		try {
+			Scanner sc = new Scanner(new File(
+					"/Users/EduardoP/git/PerGamPer-Chromosome/SuperTracker/bin/supersample/SuperTracker.data/genes.txt"));
+			// sc.useDelimiter("\n");
+			sc.useLocale(Locale.US);
+			System.out.println(sc.nextDouble());
+			System.out.println(sc.nextDouble());
+			System.out.println(sc.nextDouble());
+			System.out.println(sc.nextDouble());
+			sc.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		try {
 			DefaultConfiguration config = new DefaultConfiguration();
 			DoubleGene[] genes = new DoubleGene[4];
@@ -93,10 +93,10 @@ public class DefBattle {
 			genes[3].setAllele(12.0);
 			IChromosome pgp = new Chromosome(genes);
 			OurFitnessFunction fit = new OurFitnessFunction (pgp.getFitnessValue());
-			for (int i=0; i < 1000; i++){
+			for (int i=0; i < 100; i++){
 				double origFitness = pgp.getFitnessValue();
 				double evaluate = fit.evaluate(pgp);
-				pgp.setFitnessValue(Math.max(origFitness,evaluate);
+				pgp.setFitnessValue(Math.max(origFitness,evaluate));
 				double goodFitness = pgp.getFitnessValue();
 				genes[0].applyMutation(0, 1-evaluate);
 				genes[1].applyMutation(0, 1-evaluate);
